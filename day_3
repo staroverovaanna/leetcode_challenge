@@ -1,0 +1,25 @@
+## 20. Valid Parentheses
+## easy counters stack
+
+class Solution:
+    def isValid(self, s: str) -> bool:
+        par_counts = {'(': 0, '[': 0, '{': 0}
+        par_matching = {')': '(', ']': '[', '}': '{'}
+        last_opened = []
+        for char in s:
+            if char in par_counts.keys():
+                par_counts[char] += 1
+                last_opened.append(char)
+
+            else:
+                if (len(last_opened) == 0) or (last_opened[-1] != par_matching[char]):
+                    return False
+                par_counts[par_matching[char]] -= 1
+                if par_counts[par_matching[char]] < 0:
+                    return False
+                last_opened.pop()
+
+        if par_counts['('] != 0 or par_counts['['] != 0 or par_counts['{'] != 0:
+            return False
+        else: 
+            return True
