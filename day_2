@@ -1,0 +1,22 @@
+## 
+## medium two_pointers 
+
+class Solution:
+  def lengthOfLongestSubstring(self, s: str) -> int:
+    if len(s) <= 1:
+      return len(s)
+    longest_sbs = s[0]
+    longest_cnt = 1
+    for i in range(len(s)):
+      j = i + 2
+      while (j <= len(s)):
+        if (j > len(s)):
+          break
+        if len(set(s[i:j])) == len(s[i:j]):
+          if longest_cnt < (j - i):
+            longest_cnt = j - i
+            longest_sbs = s[i:j]
+          j += 1
+        else: j = len(s) + 1
+  
+  return longest_cnt
